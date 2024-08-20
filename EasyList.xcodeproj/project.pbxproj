@@ -16,6 +16,8 @@
 		C523508C2C7504BD00D4C94C /* EasyListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C523508B2C7504BD00D4C94C /* EasyListTests.swift */; };
 		C52350962C7504BD00D4C94C /* EasyListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52350952C7504BD00D4C94C /* EasyListUITests.swift */; };
 		C52350982C7504BD00D4C94C /* EasyListUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52350972C7504BD00D4C94C /* EasyListUITestsLaunchTests.swift */; };
+		C52350A52C7505F800D4C94C /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52350A42C7505F800D4C94C /* List.swift */; };
+		C52350A72C75060500D4C94C /* ListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52350A62C75060500D4C94C /* ListItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		C52350912C7504BD00D4C94C /* EasyListUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EasyListUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C52350952C7504BD00D4C94C /* EasyListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyListUITests.swift; sourceTree = "<group>"; };
 		C52350972C7504BD00D4C94C /* EasyListUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyListUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C52350A42C7505F800D4C94C /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
+		C52350A62C75060500D4C94C /* ListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +110,8 @@
 				C523507D2C7504BD00D4C94C /* Assets.xcassets */,
 				C523507F2C7504BD00D4C94C /* LaunchScreen.storyboard */,
 				C52350822C7504BD00D4C94C /* Info.plist */,
+				C52350A42C7505F800D4C94C /* List.swift */,
+				C52350A62C75060500D4C94C /* ListItem.swift */,
 			);
 			path = EasyList;
 			sourceTree = "<group>";
@@ -258,7 +264,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C52350A72C75060500D4C94C /* ListItem.swift in Sources */,
 				C52350792C7504BC00D4C94C /* ViewController.swift in Sources */,
+				C52350A52C7505F800D4C94C /* List.swift in Sources */,
 				C52350752C7504BC00D4C94C /* AppDelegate.swift in Sources */,
 				C52350772C7504BC00D4C94C /* SceneDelegate.swift in Sources */,
 			);
