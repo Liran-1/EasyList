@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyDtJz7pIYvllK9BYNkvbJRaq1zTeqkFJEk</string>
+	<string>AIzaSyD39Wy98it9M6FmZOh_lmMO7XkvVpKdVdo</string>
 	<key>GCM_SENDER_ID</key>
-	<string>181274213834</string>
+	<string>787669681844</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>ios-easyList.EasyList</string>
 	<key>PROJECT_ID</key>
-	<string>easylist-82df8</string>
+	<string>easylist-35d7c</string>
 	<key>STORAGE_BUCKET</key>
-	<string>easylist-82df8.appspot.com</string>
+	<string>easylist-35d7c.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:181274213834:ios:3702db1347042cef7ce333</string>
+	<string>1:787669681844:ios:21af1df3c85acdb887f9e1</string>
+	<key>DATABASE_URL</key>
+	<string>https://easylist-35d7c-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>
