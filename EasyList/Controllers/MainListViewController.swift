@@ -10,39 +10,48 @@ import UIKit
 
 class MainListViewController: UIViewController {
     
-    let cellReuseIdentifier = "ListCell"
+    let cellReuseIdentifier = "ListTableViewCell"
 
-    var lists: [List] = []
+    var lists: [List] = [List(title: "Test", items: [])]
     
     @IBOutlet weak var main_LST_lists: UITableView!
 //    let listData = testMainLists
-    let listData = ["list1", "list2", "list3"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        initView()
+        loadListData()
     }
     
-    func initList() {
-        self.main_LST_lists.register(ListTableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
-        
+    func initView() {
         main_LST_lists.delegate = self
         main_LST_lists.dataSource = self
-        
+        self.main_LST_lists.register(ListTableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+    }
+    
+    func loadListData() {
+        // Load the data
         main_LST_lists.reloadData()
+    }
+    
+    @IBAction func addListFromBar() {
         
     }
+    
     @IBAction func addList(_ sender: Any) {
         let alert = UIAlertController(title: "New List", message: "Enter list title", preferredStyle: .alert)
         alert.addTextField{ textField in
             textField.placeholder = "List title"
         }
         
-        let addAction = UIAlertAction(title: "Add", style: .default)
-        if let title = alert.textFields?.first?.text, !title.isEmpty {
-            let newList = List(title: title, items: [])
-            self.lists.append(newList)
-            self.main_LST_lists.reloadData()
+        let addAction = UIAlertAction(title: "Add", style: .default){ [weak self] _ in
+            if let title = alert.textFields?.first?.text, !title.isEmpty {
+                print("Adding new list with title \(title)")
+                let newList = List(title: title, items: [])
+                self?.lists.append(newList)
+                self?.main_LST_lists.reloadData()
+            }
         }
         
         alert.addAction(addAction)
@@ -59,19 +68,15 @@ extension MainListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = main_LST_lists.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as! ListTableViewCell
-//        var cell: UITableViewCell? = self.main_LST_lists.dequeueReusableCell(withIdentifier: cellReuseIdentifier)
-        
+        let cell: ListTableViewCell = main_LST_lists.dequeueReusableCell(withIdentifier: "ListCell", for: indexPath) as! ListTableViewCell
         let list = lists[indexPath.row]
-        cell.main_LBL_listName.text = list.title
-//        if(cell == nil) {
-//            cell = UITableViewCell(style:UITableViewCell.CellStyle.default, reuseIdentifier: cellReuseIdentifier)
-//        }
+        cell.main_LBL_listName?.text = list.title
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let listVC = storyboard?.instantiateViewController(withIdentifier: "ListViewController") as! ListViewController
+        main_LST_lists.deselectRow(at: indexPath, animated: true)
+        let listVC = storyboard?.instantiateViewController(identifier: "ListItems") as! ListViewController
         listVC.list = lists[indexPath.row]
         navigationController?.pushViewController(listVC, animated: true)
     }
