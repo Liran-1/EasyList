@@ -40,9 +40,19 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
     
     @objc func saveNewItem() {
         guard let itemName = addItem_ETXT_itemName.text, !itemName.isEmpty else { return }
-        guard let itemAmount = addItem_ETXT_ItemAmount.text, !itemAmount.isEmpty else { return }
-        guard let itemUnits = addItem_ETXT_ItemUnits.text, !itemUnits.isEmpty else { return }
-        guard let itemPrice = addItem_ETXT_ItemPrice.text, !itemPrice.isEmpty else { return }
+        guard let itemAmountStr = addItem_ETXT_ItemAmount.text, !itemAmountStr.isEmpty else { return }
+        guard let itemUnitsStr = addItem_ETXT_ItemUnits.text, !itemUnitsStr.isEmpty else { return }
+        guard let itemPriceStr = addItem_ETXT_ItemPrice.text, !itemPriceStr.isEmpty else { return }
+        
+        let itemAmount = Double(itemAmountStr) ?? 0.0
+        guard let itemUnits = Units(rawValue: itemUnitsStr) else {return}
+        let itemPrice = Double(itemPriceStr) ?? 0.0
+        
+        
+//        let newItem = ListItem(name: itemName, amount: itemAmount, units: itemUnits, price: itemPrice, completed: false)
+//        list.items.append(newItem)
+//        self.list_LST_items.reloadData()
+//        DataManager.shared.saveLists(DataManager.shared.loadLists())
     }
     
 }

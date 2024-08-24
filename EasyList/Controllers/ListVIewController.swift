@@ -15,15 +15,15 @@ class ListViewController: UIViewController{
     let cellReuseIdentifier = "ListItemTableViewCell"
     let addItemVCIdentifier = "ListAddItem"
     
-
-    var listItems: [ListItem] = []
+    var listItems: List?
+//    var listItems: [ListItem] = []
 //    let listItems = testListItem1
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "List Items"
+//        self.title = "List Items"
         
         initView()
     }
@@ -34,6 +34,7 @@ class ListViewController: UIViewController{
         list_LST_items.delegate = self
         list_LST_items.dataSource = self
         
+        self.title = listItems?.title
         list_LST_items.reloadData()
     }
     
@@ -44,6 +45,10 @@ class ListViewController: UIViewController{
     }
     
     @IBAction func addItem(_ sender: Any) {
+        showAddItemAlert()
+    }
+    
+    func showAddItemAlert() {
         let alert = UIAlertController(title: "New Item", message: "Enter item details", preferredStyle: .alert)
         alert.addTextField{ textField in
             textField.placeholder = "Item name"
@@ -61,16 +66,22 @@ class ListViewController: UIViewController{
         }
         
         let addAction = UIAlertAction(title: "Add", style: .default) { [weak self] _ in
-            guard var list = self?.listItems,
-                  let itemName = alert.textFields?[0].text,
-                  let itemAmountStr = alert.textFields?[1].text, let itemAmount = Double(itemAmountStr),
-                  let itemUnits = alert.textFields?[2].text,
-                  let itemPriceStr = alert.textFields?[3].text, let itemPrice = Double(itemPriceStr)
-            else { return }
+            guard let self = self, let list = self.listItems else { return }
+            let itemName = alert.textFields?[0].text ?? ""
             
-            let newItem = ListItem(name: itemName, amount: itemAmount, units: Units.pc, price: itemPrice, completed: false)
-            self?.listItems.append(newItem)
-            self?.list_LST_items.reloadData()
+            let itemAmountStr = alert.textFields?[1].text ?? ""
+            let itemAmount = Double(itemAmountStr) ?? 0.0
+            
+            let itemUnitsStr = alert.textFields?[2].text ?? ""
+            guard let units = Units(rawValue: itemUnitsStr) else {return}
+            
+            let itemPriceStr = alert.textFields?[3].text ?? ""
+            let itemPrice = Double(itemPriceStr) ?? 0.0
+            
+            let newItem = ListItem(name: itemName, amount: itemAmount, units: units, price: itemPrice, completed: false)
+            list.items.append(newItem)
+            self.list_LST_items.reloadData()
+            updateSavedData(updatedList: list)
         }
         
         alert.addAction(addAction)
@@ -78,26 +89,37 @@ class ListViewController: UIViewController{
         present(alert, animated: true)
     }
     
+    func updateSavedData(updatedList: List) {
+        var allLists = DataManager.shared.loadLists()
+        if let index = allLists.firstIndex(where: {$0.title == listItems?.title}) {
+            allLists[index] = updatedList
+            DataManager.shared.saveLists(allLists)
+
+        }
+    }
+    
 }
 
 extension ListViewController:  UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.listItems.count
+        return self.listItems?.items.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: ListItemTableViewCell = list_LST_items.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ListItemTableViewCell
-        let item = listItems[indexPath.row]
-        
-        cell.list_LBL_itemName.text = item.name
-        cell.list_LBL_itemAmount.text = "\(item.amount ?? 0)"
-        cell.list_LBL_itemUnits.text = item.name
-        cell.list_LBL_itemPrice.text = "\(item.price ?? 0)"
+        if let item = listItems?.items[indexPath.row]{
+            cell.list_LBL_itemName.text = item.name
+            cell.list_LBL_itemAmount.text = "\(item.amount)"
+            cell.list_LBL_itemUnits.text = item.units.rawValue
+            cell.list_LBL_itemPrice.text = "\(item.price)"
+        }
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        list_LST_items.deselectRow(at: indexPath, animated: true)
+
 //        let item = list?.items[indexPath.row]
         
     }

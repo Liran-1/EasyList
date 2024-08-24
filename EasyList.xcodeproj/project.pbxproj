@@ -25,6 +25,8 @@
 		C5CBD0922C7601B900976C6F /* MainListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CBD0912C7601B900976C6F /* MainListViewController.swift */; };
 		C5CBD0942C791D7E00976C6F /* ListItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CBD0932C791D7E00976C6F /* ListItemTableViewCell.swift */; };
 		C5CBD0962C79262B00976C6F /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CBD0952C79262B00976C6F /* ListTableViewCell.swift */; };
+		C5F1E46E2C7A090300C78CEC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F1E46D2C7A090300C78CEC /* Constants.swift */; };
+		C5F1E4712C7A1D4D00C78CEC /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F1E4702C7A1D4D00C78CEC /* DataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +67,8 @@
 		C5CBD0912C7601B900976C6F /* MainListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainListViewController.swift; sourceTree = "<group>"; };
 		C5CBD0932C791D7E00976C6F /* ListItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemTableViewCell.swift; sourceTree = "<group>"; };
 		C5CBD0952C79262B00976C6F /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
+		C5F1E46D2C7A090300C78CEC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		C5F1E4702C7A1D4D00C78CEC /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +121,7 @@
 		C52350732C7504BC00D4C94C /* EasyList */ = {
 			isa = PBXGroup;
 			children = (
+				C5F1E46F2C7A1D1300C78CEC /* Utils */,
 				C5CBD0972C79434A00976C6F /* Controllers */,
 				C5710D792C75E2B30078EEAD /* App */,
 				C5710D782C75E29A0078EEAD /* Views */,
@@ -182,6 +187,15 @@
 				C5ADF63F2C79E1C60067160B /* AddItemViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		C5F1E46F2C7A1D1300C78CEC /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				C5F1E46D2C7A090300C78CEC /* Constants.swift */,
+				C5F1E4702C7A1D4D00C78CEC /* DataManager.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -323,6 +337,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C5CBD0942C791D7E00976C6F /* ListItemTableViewCell.swift in Sources */,
+				C5F1E4712C7A1D4D00C78CEC /* DataManager.swift in Sources */,
+				C5F1E46E2C7A090300C78CEC /* Constants.swift in Sources */,
 				C5CBD0922C7601B900976C6F /* MainListViewController.swift in Sources */,
 				C5710D762C75D8930078EEAD /* ListVIewController.swift in Sources */,
 				C52350A72C75060500D4C94C /* ListItem.swift in Sources */,

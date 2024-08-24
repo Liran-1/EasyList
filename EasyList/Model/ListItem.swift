@@ -7,15 +7,50 @@
 
 import Foundation
 
-struct ListItem {
+class ListItem:Codable {
     var name: String
     var amount: Double
     var units: Units
     var price: Double
     var completed: Bool
+    
+    init(name: String, amount: Double, units: Units, price: Double, completed: Bool) {
+        self.name = name
+        self.amount = amount
+        self.units = units
+        self.price = price
+        self.completed = completed
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case name
+        case amount
+        case units
+        case price
+        case completed
+    }
+    
+    required init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.name = try container.decode(String.self, forKey: .name)
+        self.amount = try container.decode(Double.self, forKey: .amount)
+        self.units = try container.decode(Units.self, forKey: .units)
+        self.price = try container.decode(Double.self, forKey: .price)
+        self.completed = try container.decode(Bool.self, forKey: .completed)
+    }
+    
+    func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(name, forKey: .name)
+        try container.encode(amount, forKey: .amount)
+        try container.encode(units, forKey: .units)
+        try container.encode(price, forKey: .price)
+        try container.encode(completed, forKey: .completed)
+    }
+    
 }
 
-enum Units: String {
+enum Units: String, Codable {
     case g, kg, lbs, ml, lit, oz, pc
 }
 
