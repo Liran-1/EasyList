@@ -34,6 +34,7 @@
 		C5F1E47C2C7A8EA700C78CEC /* FirebaseGoogleAuthUI in Frameworks */ = {isa = PBXBuildFile; productRef = C5F1E47B2C7A8EA700C78CEC /* FirebaseGoogleAuthUI */; };
 		C5F1E47E2C7A8EA700C78CEC /* FirebaseOAuthUI in Frameworks */ = {isa = PBXBuildFile; productRef = C5F1E47D2C7A8EA700C78CEC /* FirebaseOAuthUI */; };
 		C5F1E4802C7A8EA700C78CEC /* FirebasePhoneAuthUI in Frameworks */ = {isa = PBXBuildFile; productRef = C5F1E47F2C7A8EA700C78CEC /* FirebasePhoneAuthUI */; };
+		C5F1E4822C7A9C6F00C78CEC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C5F1E4812C7A9C6F00C78CEC /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		C5CBD0952C79262B00976C6F /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		C5F1E46D2C7A090300C78CEC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C5F1E4702C7A1D4D00C78CEC /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		C5F1E4812C7A9C6F00C78CEC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 				C523507D2C7504BD00D4C94C /* Assets.xcassets */,
 				C523507F2C7504BD00D4C94C /* LaunchScreen.storyboard */,
 				C52350822C7504BD00D4C94C /* Info.plist */,
+				C5F1E4812C7A9C6F00C78CEC /* GoogleService-Info.plist */,
 			);
 			path = EasyList;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C523507E2C7504BD00D4C94C /* Assets.xcassets in Resources */,
+				C5F1E4822C7A9C6F00C78CEC /* GoogleService-Info.plist in Resources */,
 				C52350812C7504BD00D4C94C /* Base in Resources */,
 				C523507C2C7504BC00D4C94C /* Base in Resources */,
 			);
@@ -556,8 +560,8 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -583,8 +587,8 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

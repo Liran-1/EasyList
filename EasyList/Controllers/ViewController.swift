@@ -29,7 +29,6 @@ class ViewController: UIViewController, FUIAuthDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        FirebaseApp.configure()
         ref = Database.database().reference()
         
         initFirebaseAuthentication()
