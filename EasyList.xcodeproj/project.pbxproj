@@ -22,6 +22,10 @@
 		C52350AC2C752B5100D4C94C /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = C52350AB2C752B5100D4C94C /* FirebaseDatabase */; };
 		C5710D762C75D8930078EEAD /* ListVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5710D752C75D8930078EEAD /* ListVIewController.swift */; };
 		C5ADF6402C79E1C60067160B /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5ADF63F2C79E1C60067160B /* AddItemViewController.swift */; };
+		C5B5D2372C7AFA43008F14F2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B5D2362C7AFA43008F14F2 /* LoginViewController.swift */; };
+		C5B5D2392C7AFA51008F14F2 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B5D2382C7AFA51008F14F2 /* ForgotPasswordViewController.swift */; };
+		C5B5D23B2C7AFA69008F14F2 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B5D23A2C7AFA69008F14F2 /* RegisterViewController.swift */; };
+		C5B5D23D2C7B0217008F14F2 /* AuthHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B5D23C2C7B0217008F14F2 /* AuthHeaderView.swift */; };
 		C5CBD0922C7601B900976C6F /* MainListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CBD0912C7601B900976C6F /* MainListViewController.swift */; };
 		C5CBD0942C791D7E00976C6F /* ListItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CBD0932C791D7E00976C6F /* ListItemTableViewCell.swift */; };
 		C5CBD0962C79262B00976C6F /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CBD0952C79262B00976C6F /* ListTableViewCell.swift */; };
@@ -72,6 +76,10 @@
 		C52350A62C75060500D4C94C /* ListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItem.swift; sourceTree = "<group>"; };
 		C5710D752C75D8930078EEAD /* ListVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListVIewController.swift; sourceTree = "<group>"; };
 		C5ADF63F2C79E1C60067160B /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
+		C5B5D2362C7AFA43008F14F2 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		C5B5D2382C7AFA51008F14F2 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		C5B5D23A2C7AFA69008F14F2 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		C5B5D23C2C7B0217008F14F2 /* AuthHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHeaderView.swift; sourceTree = "<group>"; };
 		C5CBD0912C7601B900976C6F /* MainListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainListViewController.swift; sourceTree = "<group>"; };
 		C5CBD0932C791D7E00976C6F /* ListItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemTableViewCell.swift; sourceTree = "<group>"; };
 		C5CBD0952C79262B00976C6F /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
@@ -182,6 +190,7 @@
 			children = (
 				C5CBD0932C791D7E00976C6F /* ListItemTableViewCell.swift */,
 				C5CBD0952C79262B00976C6F /* ListTableViewCell.swift */,
+				C5B5D23C2C7B0217008F14F2 /* AuthHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -202,6 +211,9 @@
 				C5710D752C75D8930078EEAD /* ListVIewController.swift */,
 				C5CBD0912C7601B900976C6F /* MainListViewController.swift */,
 				C5ADF63F2C79E1C60067160B /* AddItemViewController.swift */,
+				C5B5D2362C7AFA43008F14F2 /* LoginViewController.swift */,
+				C5B5D2382C7AFA51008F14F2 /* ForgotPasswordViewController.swift */,
+				C5B5D23A2C7AFA69008F14F2 /* RegisterViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -367,12 +379,16 @@
 				C5F1E46E2C7A090300C78CEC /* Constants.swift in Sources */,
 				C5CBD0922C7601B900976C6F /* MainListViewController.swift in Sources */,
 				C5710D762C75D8930078EEAD /* ListVIewController.swift in Sources */,
+				C5B5D23D2C7B0217008F14F2 /* AuthHeaderView.swift in Sources */,
+				C5B5D23B2C7AFA69008F14F2 /* RegisterViewController.swift in Sources */,
 				C52350A72C75060500D4C94C /* ListItem.swift in Sources */,
 				C52350792C7504BC00D4C94C /* ViewController.swift in Sources */,
 				C5ADF6402C79E1C60067160B /* AddItemViewController.swift in Sources */,
+				C5B5D2392C7AFA51008F14F2 /* ForgotPasswordViewController.swift in Sources */,
 				C52350A52C7505F800D4C94C /* List.swift in Sources */,
 				C52350752C7504BC00D4C94C /* AppDelegate.swift in Sources */,
 				C52350772C7504BC00D4C94C /* SceneDelegate.swift in Sources */,
+				C5B5D2372C7AFA43008F14F2 /* LoginViewController.swift in Sources */,
 				C5CBD0962C79262B00976C6F /* ListTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
