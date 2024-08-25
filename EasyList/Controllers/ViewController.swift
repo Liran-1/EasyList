@@ -31,8 +31,35 @@ class ViewController: UIViewController, FUIAuthDelegate {
         super.viewDidLoad()
         ref = Database.database().reference()
         
-        initFirebaseAuthentication()
+//        initFirebaseAuthentication()
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print("HERE!!!!")
+        Auth.auth().addStateDidChangeListener { (auth, user )in
+            if let user = user {
+                print("user info = \(user)")
+//                self.showUserInfo(user: user)
+            } else {
+                self.showLoginVC()
+            }
+        }
+    }
+    
+//    func showUserInfo(user: User) {
+//        
+//    }
+    
+    func showLoginVC() {
+        let authUI = FUIAuth.defaultAuthUI()
+        let providers: [FUIAuthProvider] = [
+            FUIGoogleAuth(),
+            FUIEmailAuth()
+        ]
+        authUI?.providers = providers
+        let authViewController = authUI!.authViewController()
+        self.present(authViewController, animated: true, completion: nil)
     }
     
     func initFirebaseAuthentication() {

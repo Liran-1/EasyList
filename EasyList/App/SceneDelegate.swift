@@ -14,15 +14,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else {return}
-        let window = UIWindow(windowScene: windowScene)
-        
-        let homeVC = LoginViewController()
-        let nav = UINavigationController(rootViewController: homeVC)
-        nav.modalPresentationStyle = .fullScreen
-        
-        window.rootViewController = nav
-        self.window = window
-        self.window?.makeKeyAndVisible()
+//        let window = UIWindow(windowScene: windowScene)
+//        
+//        let homeVC = LoginViewController()
+//        let nav = UINavigationController(rootViewController: homeVC)
+//        nav.modalPresentationStyle = .fullScreen
+//        
+//        window.rootViewController = nav
+//        self.window = window
+//        self.window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
