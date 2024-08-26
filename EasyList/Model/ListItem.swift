@@ -50,7 +50,7 @@ class ListItem:Codable {
     
 }
 
-enum Units: String, Codable {
+enum Units: String, CaseIterable, Codable {
     case g, kg, lbs, ml, lit, oz, pc
 }
 

@@ -10,11 +10,16 @@ import FirebaseAuth
 
 class RegisterViewController: UIViewController {
  
+    @IBOutlet weak var register_LBL_signUp: UILabel!
+    @IBOutlet weak var register_LBL_signUpSub: UILabel!
     @IBOutlet weak var register_ETXT_email: UITextField!
     @IBOutlet weak var register_ETXT_password: UITextField!
+    @IBOutlet weak var register_BTN_createAnAccount: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        initUI()
     }
     
     
@@ -30,6 +35,16 @@ class RegisterViewController: UIViewController {
             return false
         }
         return true
+    }
+    
+    func initUI() {
+        let uiManager = UIManager.shared
+        
+        uiManager.setTitleLabel(titleLabel: register_LBL_signUp)
+        uiManager.setSubtitleLabel(subtitleLabel: register_LBL_signUpSub)
+        uiManager.setTextField(textField: register_ETXT_email)
+        uiManager.setTextField(textField: register_ETXT_password)
+        uiManager.setButton(button: register_BTN_createAnAccount)
     }
     
     @IBAction func register_BTN_createAccount(_ sender: UIButton) {

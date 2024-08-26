@@ -20,6 +20,7 @@
 		C52350A72C75060500D4C94C /* ListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52350A62C75060500D4C94C /* ListItem.swift */; };
 		C52350AA2C752B5100D4C94C /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C52350A92C752B5100D4C94C /* FirebaseAuth */; };
 		C52350AC2C752B5100D4C94C /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = C52350AB2C752B5100D4C94C /* FirebaseDatabase */; };
+		C54CE4292C7CE9BF00A3511A /* UIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54CE4282C7CE9BF00A3511A /* UIManager.swift */; };
 		C5710D762C75D8930078EEAD /* ListVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5710D752C75D8930078EEAD /* ListVIewController.swift */; };
 		C5ADF6402C79E1C60067160B /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5ADF63F2C79E1C60067160B /* AddItemViewController.swift */; };
 		C5B5D2372C7AFA43008F14F2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B5D2362C7AFA43008F14F2 /* LoginViewController.swift */; };
@@ -74,6 +75,7 @@
 		C52350972C7504BD00D4C94C /* EasyListUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyListUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C52350A42C7505F800D4C94C /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 		C52350A62C75060500D4C94C /* ListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItem.swift; sourceTree = "<group>"; };
+		C54CE4282C7CE9BF00A3511A /* UIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIManager.swift; sourceTree = "<group>"; };
 		C5710D752C75D8930078EEAD /* ListVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListVIewController.swift; sourceTree = "<group>"; };
 		C5ADF63F2C79E1C60067160B /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
 		C5B5D2362C7AFA43008F14F2 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 			children = (
 				C5F1E46D2C7A090300C78CEC /* Constants.swift */,
 				C5F1E4702C7A1D4D00C78CEC /* DataManager.swift */,
+				C54CE4282C7CE9BF00A3511A /* UIManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 				C5CBD0942C791D7E00976C6F /* ListItemTableViewCell.swift in Sources */,
 				C5F1E4712C7A1D4D00C78CEC /* DataManager.swift in Sources */,
 				C5F1E46E2C7A090300C78CEC /* Constants.swift in Sources */,
+				C54CE4292C7CE9BF00A3511A /* UIManager.swift in Sources */,
 				C5CBD0922C7601B900976C6F /* MainListViewController.swift in Sources */,
 				C5710D762C75D8930078EEAD /* ListVIewController.swift in Sources */,
 				C5B5D23D2C7B0217008F14F2 /* AuthHeaderView.swift in Sources */,

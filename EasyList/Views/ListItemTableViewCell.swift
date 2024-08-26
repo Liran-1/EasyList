@@ -19,7 +19,8 @@ class ListItemTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        list_IMG_itemCheck.image = UIImage(systemName: "checkmark")
+        list_LBL_itemName.font = UIFont.boldSystemFont(ofSize: 20)
+
     }
     
     

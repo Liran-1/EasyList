@@ -10,22 +10,20 @@ import Foundation
 
 class ListViewController: UIViewController{
     
+    @IBOutlet weak var list_LBL_listName: UILabel!
     @IBOutlet weak var list_LST_items: UITableView!
+    @IBOutlet weak var list_BTN_addNewItem: UIButton!
     
     let cellReuseIdentifier = "ListItemTableViewCell"
     let addItemVCIdentifier = "ListAddItem"
     
     var listItems: List?
-//    var listItems: [ListItem] = []
-//    let listItems = testListItem1
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        self.title = "List Items"
-        
+                
         initView()
+        initUI()
     }
     
     func initView() {
@@ -36,6 +34,14 @@ class ListViewController: UIViewController{
         
         self.title = listItems?.title
         list_LST_items.reloadData()
+    }
+    
+    func initUI() {
+        let uiManager = UIManager.shared
+        
+        uiManager.setTitleLabel(titleLabel: list_LBL_listName)
+        uiManager.setTableView(tableView: list_LST_items)
+        uiManager.setButton(button: list_BTN_addNewItem)
     }
     
     @IBAction func didTapAdd() {
@@ -49,44 +55,67 @@ class ListViewController: UIViewController{
     }
     
     func showAddItemAlert() {
-        let alert = UIAlertController(title: "New Item", message: "Enter item details", preferredStyle: .alert)
-        alert.addTextField{ textField in
+        let alertController = UIAlertController(title: "New Item", message: "Enter item details", preferredStyle: .alert)
+        
+        UIManager.shared.setAlert(alert: alertController)
+
+        
+        alertController.addTextField{ textField in
             textField.placeholder = "Item name"
         }
-        alert.addTextField{ textField in
+        alertController.addTextField{ textField in
             textField.placeholder = "Amount"
             textField.keyboardType = .decimalPad
         }
-        alert.addTextField{ textField in
-            textField.placeholder = "Units"
+
+        alertController.addTextField{ textField in
+            textField.placeholder = "Units (g\\kg\\lbs\\ml\\lit\\oz\\pc)"
         }
-        alert.addTextField{ textField in
+        alertController.addTextField{ textField in
             textField.placeholder = "Price"
             textField.keyboardType = .decimalPad
         }
         
         let addAction = UIAlertAction(title: "Add", style: .default) { [weak self] _ in
-            guard let self = self, let list = self.listItems else { return }
-            let itemName = alert.textFields?[0].text ?? ""
+            guard let self = self,
+                  let list = self.listItems,
+                  let itemName = alertController.textFields?[0].text, !itemName.isEmpty,
+                  let itemAmountStr = alertController.textFields?[1].text, !itemAmountStr.isEmpty,
+                  let itemAmount = Double(itemAmountStr),
+                  let itemUnitsStr = alertController.textFields?[2].text, !itemUnitsStr.isEmpty,
+                  let itemUnits = Units(rawValue: itemUnitsStr),
+                  let itemPriceStr = alertController.textFields?[3].text, !itemPriceStr.isEmpty,
+                  let itemPrice = Double(itemPriceStr)
+            else { return }
+//            let itemName = alertController.textFields?[0].text
             
-            let itemAmountStr = alert.textFields?[1].text ?? ""
-            let itemAmount = Double(itemAmountStr) ?? 0.0
+//            let itemAmountStr = alertController.textFields?[1].text
+//            let itemAmount = Double(itemAmountStr)
             
-            let itemUnitsStr = alert.textFields?[2].text ?? ""
-            guard let units = Units(rawValue: itemUnitsStr) else {return}
             
-            let itemPriceStr = alert.textFields?[3].text ?? ""
-            let itemPrice = Double(itemPriceStr) ?? 0.0
+//            let itemUnitsStr = alertController.textFields?[2].text
+//            guard let itemUnits = Units(rawValue: itemUnitsStr) else {return}
             
-            let newItem = ListItem(name: itemName, amount: itemAmount, units: units, price: itemPrice, completed: false)
+//            let itemPriceStr = alertController.textFields?[3].text
+//            let itemPrice = Double(itemPriceStr)
+            
+            let newItem = ListItem(name: itemName, amount: itemAmount, units: itemUnits, price: itemPrice, completed: false)
             list.items.append(newItem)
             self.list_LST_items.reloadData()
             updateSavedData(updatedList: list)
         }
         
-        alert.addAction(addAction)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        present(alert, animated: true)
+        alertController.addAction(addAction)
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(alertController, animated: true)
+    }
+    
+    func createUnitsPicker(alertController: UIAlertController) -> UIPickerView {
+        let pickerView = UIPickerView()
+        pickerView.dataSource = self
+        pickerView.delegate = self
+        
+        return pickerView
     }
     
     func updateSavedData(updatedList: List) {
@@ -94,9 +123,23 @@ class ListViewController: UIViewController{
         if let index = allLists.firstIndex(where: {$0.title == listItems?.title}) {
             allLists[index] = updatedList
             DataManager.shared.saveLists(allLists)
-
         }
     }
+}
+
+extension ListViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return Units.allCases.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return Units.allCases[row].rawValue
+    }
+    
     
 }
 
@@ -112,6 +155,7 @@ extension ListViewController:  UITableViewDelegate, UITableViewDataSource {
             cell.list_LBL_itemAmount.text = "\(item.amount)"
             cell.list_LBL_itemUnits.text = item.units.rawValue
             cell.list_LBL_itemPrice.text = "\(item.price)"
+            cell.list_IMG_itemCheck.image = UIImage(named: item.completed ? "icon_checked" : "icon_unchecked")
         }
         
         return cell
@@ -119,8 +163,27 @@ extension ListViewController:  UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         list_LST_items.deselectRow(at: indexPath, animated: true)
-
-//        let item = list?.items[indexPath.row]
         
+        let item = listItems?.items[indexPath.row]
+        item?.completed.toggle()
+        
+        list_LST_items.reloadRows(at: [indexPath], with: .automatic)
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (action, view, completionHandler) in
+            self?.handleDelete(at: indexPath)
+            completionHandler(true)
+        }
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        return configuration
+    }
+    
+    private func handleDelete(at indexPath: IndexPath) {
+        // Remove the item from the list
+        listItems?.items.remove(at: indexPath.row)
+        
+        // Animate the deletion
+        list_LST_items.deleteRows(at: [indexPath], with: .automatic)
     }
 }

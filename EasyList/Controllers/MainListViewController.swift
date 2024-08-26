@@ -13,16 +13,20 @@ class MainListViewController: UIViewController {
     let cellReuseIdentifier = "ListTableViewCell"
 
     var lists: [List] = []
+//    var alertController: UIAlertController?
 //    var lists: [List] = [List(title: "Test", items: [])]
     
     @IBOutlet weak var main_LST_lists: UITableView!
-//    let listData = testMainLists
+    @IBOutlet weak var main_BTN_addNewList: UIButton!
+    //    let listData = testMainLists
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         initView()
         loadListData()
+        
+        initUI()
     }
     
     func initView() {
@@ -44,6 +48,13 @@ class MainListViewController: UIViewController {
         main_LST_lists.reloadData()
     }
     
+    func initUI() {
+        let uiManager = UIManager.shared
+        
+        uiManager.setTableView(tableView: main_LST_lists)
+        uiManager.setButton(button: main_BTN_addNewList)
+    }
+    
     
     @IBAction func addListFromBar() {
         showAddListAlert()
@@ -54,13 +65,14 @@ class MainListViewController: UIViewController {
     }
     
     func showAddListAlert() {
-        let alert = UIAlertController(title: "New List", message: "Enter list title", preferredStyle: .alert)
-        alert.addTextField{ textField in
+        let alertController = UIAlertController(title: "New List", message: "Enter list title", preferredStyle: .alert)
+        UIManager.shared.setAlert(alert: alertController)
+        alertController.addTextField{ textField in
             textField.placeholder = "List title"
         }
         
         let addAction = UIAlertAction(title: "Add", style: .default){ [weak self] _ in
-            if let title = alert.textFields?.first?.text, !title.isEmpty {
+            if let title = alertController.textFields?.first?.text, !title.isEmpty {
                 print("Adding new list with title \(title)")
                 let newList = List(title: title, items: [])
                 self?.lists.append(newList)
@@ -69,9 +81,9 @@ class MainListViewController: UIViewController {
             }
         }
         
-        alert.addAction(addAction)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        present(alert, animated: true)
+        alertController.addAction(addAction)
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(alertController, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
