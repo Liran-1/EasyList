@@ -35,6 +35,7 @@ class UIManager {
     func setTableView(tableView: UITableView) {
         tableView.backgroundColor = UIColor.systemGroupedBackground
         tableView.separatorColor = UIColor.lightGray
+        tableView.layer.cornerRadius = 8
     }
     
     func setButton(button: UIButton) {

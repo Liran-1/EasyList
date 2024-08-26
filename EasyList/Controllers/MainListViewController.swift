@@ -7,14 +7,13 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
 
 class MainListViewController: UIViewController {
     
     let cellReuseIdentifier = "ListTableViewCell"
 
     var lists: [List] = []
-//    var alertController: UIAlertController?
-//    var lists: [List] = [List(title: "Test", items: [])]
     
     @IBOutlet weak var main_LST_lists: UITableView!
     @IBOutlet weak var main_BTN_addNewList: UIButton!
@@ -27,6 +26,30 @@ class MainListViewController: UIViewController {
         loadListData()
         
         initUI()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
+        
+        if self.isMovingFromParent {
+            logout()
+        }
+    }
+    
+    func logout() {
+        do {
+            try Auth.auth().signOut()
+            navigateToLoginScreen()
+        } catch let error {
+            print("Failed to sign out: \(error.localizedDescription)")
+        }
+    }
+    
+    func navigateToLoginScreen() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let viewController = storyboard.instantiateViewController(withIdentifier: "Login") as? LoginViewController {
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }
     }
     
     func initView() {
@@ -53,6 +76,7 @@ class MainListViewController: UIViewController {
         
         uiManager.setTableView(tableView: main_LST_lists)
         uiManager.setButton(button: main_BTN_addNewList)
+        
     }
     
     
@@ -115,5 +139,22 @@ extension MainListViewController: UITableViewDataSource, UITableViewDelegate {
         let listVC = storyboard?.instantiateViewController(identifier: "ListItems") as! ListViewController
         listVC.listItems = lists[indexPath.row]
         navigationController?.pushViewController(listVC, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete List") { [weak self] (action, view, completionHandler) in
+            self?.handleDelete(at: indexPath)
+            completionHandler(true)
+        }
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        return configuration
+    }
+    
+    private func handleDelete(at indexPath: IndexPath) {
+        // Remove the item from the list
+        lists.remove(at: indexPath.row)
+        
+        // Animate the deletion
+        main_LST_lists.deleteRows(at: [indexPath], with: .automatic)
     }
 }
