@@ -22,6 +22,8 @@
 		C52350AC2C752B5100D4C94C /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = C52350AB2C752B5100D4C94C /* FirebaseDatabase */; };
 		C54CE4292C7CE9BF00A3511A /* UIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54CE4282C7CE9BF00A3511A /* UIManager.swift */; };
 		C5710D762C75D8930078EEAD /* ListVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5710D752C75D8930078EEAD /* ListVIewController.swift */; };
+		C58014A32C7E257E00920CA5 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = C58014A22C7E257E00920CA5 /* FirebaseFirestore */; };
+		C58014A52C7E261200920CA5 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58014A42C7E261200920CA5 /* UserManager.swift */; };
 		C5ADF6402C79E1C60067160B /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5ADF63F2C79E1C60067160B /* AddItemViewController.swift */; };
 		C5B5D2372C7AFA43008F14F2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B5D2362C7AFA43008F14F2 /* LoginViewController.swift */; };
 		C5B5D2392C7AFA51008F14F2 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B5D2382C7AFA51008F14F2 /* ForgotPasswordViewController.swift */; };
@@ -77,6 +79,7 @@
 		C52350A62C75060500D4C94C /* ListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItem.swift; sourceTree = "<group>"; };
 		C54CE4282C7CE9BF00A3511A /* UIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIManager.swift; sourceTree = "<group>"; };
 		C5710D752C75D8930078EEAD /* ListVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListVIewController.swift; sourceTree = "<group>"; };
+		C58014A42C7E261200920CA5 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		C5ADF63F2C79E1C60067160B /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
 		C5B5D2362C7AFA43008F14F2 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		C5B5D2382C7AFA51008F14F2 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
@@ -98,6 +101,7 @@
 				C5F1E47A2C7A8EA700C78CEC /* FirebaseEmailAuthUI in Frameworks */,
 				C5F1E4742C7A8EA700C78CEC /* FirebaseAnonymousAuthUI in Frameworks */,
 				C52350AC2C752B5100D4C94C /* FirebaseDatabase in Frameworks */,
+				C58014A32C7E257E00920CA5 /* FirebaseFirestore in Frameworks */,
 				C5F1E47C2C7A8EA700C78CEC /* FirebaseGoogleAuthUI in Frameworks */,
 				C5F1E4802C7A8EA700C78CEC /* FirebasePhoneAuthUI in Frameworks */,
 				C5F1E4782C7A8EA700C78CEC /* FirebaseDatabaseUI in Frameworks */,
@@ -226,6 +230,7 @@
 				C5F1E46D2C7A090300C78CEC /* Constants.swift */,
 				C5F1E4702C7A1D4D00C78CEC /* DataManager.swift */,
 				C54CE4282C7CE9BF00A3511A /* UIManager.swift */,
+				C58014A42C7E261200920CA5 /* UserManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -256,6 +261,7 @@
 				C5F1E47B2C7A8EA700C78CEC /* FirebaseGoogleAuthUI */,
 				C5F1E47D2C7A8EA700C78CEC /* FirebaseOAuthUI */,
 				C5F1E47F2C7A8EA700C78CEC /* FirebasePhoneAuthUI */,
+				C58014A22C7E257E00920CA5 /* FirebaseFirestore */,
 			);
 			productName = EasyList;
 			productReference = C52350712C7504BC00D4C94C /* EasyList.app */;
@@ -377,6 +383,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C58014A52C7E261200920CA5 /* UserManager.swift in Sources */,
 				C5CBD0942C791D7E00976C6F /* ListItemTableViewCell.swift in Sources */,
 				C5F1E4712C7A1D4D00C78CEC /* DataManager.swift in Sources */,
 				C5F1E46E2C7A090300C78CEC /* Constants.swift in Sources */,
@@ -764,6 +771,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C52350A82C752B5100D4C94C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseDatabase;
+		};
+		C58014A22C7E257E00920CA5 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C52350A82C752B5100D4C94C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
 		};
 		C5F1E4732C7A8EA700C78CEC /* FirebaseAnonymousAuthUI */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -6,10 +6,13 @@
 //
 
 import Foundation
+import FirebaseDatabase
 
 class DataManager {
     static let shared = DataManager()
     private let listsKey = ConstantsUserDefaults.listsKey
+    
+    var ref: DatabaseReference!
     
     private init() {}
     
@@ -22,6 +25,12 @@ class DataManager {
         } catch {
             print("Failed to encode lists: \(error)")
         }
+    }
+    
+    func saveListsToDB(_ lists: [List]) {
+        ref = Database.database().reference()
+        self.ref.child("users").child(user)
+
     }
     
     func loadLists() -> [List] {

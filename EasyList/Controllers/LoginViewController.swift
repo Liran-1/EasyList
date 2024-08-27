@@ -54,19 +54,9 @@ class LoginViewController: UIViewController {
         guard let email = login_ETXT_email.text, !email.isEmpty else {return}
         guard let password = login_ETXT_password.text, !password.isEmpty else {return}
     
-        Auth.auth().signIn(withEmail: email, password: password) { firebaseResult, error in
-            if let error = error {
-                print("error occured: \(error.localizedDescription)")
-            } else {
-                if Auth.auth().currentUser != nil {
-                    let user = Auth.auth().currentUser
-                    if let user = user {
-                        print("uid = \(user.uid)")
-                        print("email = \(user.email)")
-                    }
-                    self.navigateToMainListScreen()
-                }
-            }
+        if (UserManager.shared.loginUser(email: email, password: password)) {
+            self.navigateToMainListScreen()
         }
+        
     }
 }
