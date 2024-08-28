@@ -52,7 +52,7 @@ class RegisterViewController: UIViewController {
         guard let password = register_ETXT_password.text, !password.isEmpty else {return}
         if !validatePassword(password: password) { return }
         
-        if( UserManager.shared.createUser()) {
+        if( UserManager.shared.createUser(email: email, password: password)) {
             self.navigateToMainListScreen()
         }
 

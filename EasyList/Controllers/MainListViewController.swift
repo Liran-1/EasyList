@@ -49,8 +49,8 @@ class MainListViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let viewController = storyboard.instantiateViewController(withIdentifier: "Login") as? LoginViewController {
             self.navigationController?.pushViewController(viewController, animated: true)
-        }
-    }
+        } // end if
+    } // end navigateToLoginScreen
     
     func initView() {
         main_LST_lists.delegate = self
@@ -60,6 +60,13 @@ class MainListViewController: UIViewController {
     
     func loadListData() {
         lists = DataManager.shared.loadLists()
+//        Task { @MainActor in
+//            do {
+//                self.lists = try await DataManager.shared.loadListsFromDB()
+//            } catch {
+//                print("Loading lists from Firebase failed with error \(error)")
+//            }
+//        } // end Task
         
         
         // Load the data
@@ -69,15 +76,14 @@ class MainListViewController: UIViewController {
 //        }
         
         main_LST_lists.reloadData()
-    }
+    } // end loadListData
     
     func initUI() {
         let uiManager = UIManager.shared
         
         uiManager.setTableView(tableView: main_LST_lists)
         uiManager.setButton(button: main_BTN_addNewList)
-        
-    }
+    } // end initUI
     
     
     @IBAction func addListFromBar() {
@@ -102,6 +108,7 @@ class MainListViewController: UIViewController {
                 self?.lists.append(newList)
                 self?.main_LST_lists.reloadData()
                 DataManager.shared.saveLists(self?.lists ?? [])
+//                DataManager.shared.saveListsToDB(self?.lists ?? [])
             }
         }
         

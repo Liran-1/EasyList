@@ -29,8 +29,21 @@ class DataManager {
     
     func saveListsToDB(_ lists: [List]) {
         ref = Database.database().reference()
-        self.ref.child("users").child(user)
-
+        guard let currentUser = UserManager.shared.currentUser else { return }
+        self.ref.child("users").child(currentUser.uid).setValue(["userLists" : lists])
+    }
+    
+    func loadListsFromDB() async  -> [List]{
+        ref = Database.database().reference()
+        guard let currentUser = UserManager.shared.currentUser else { return [] }
+        do {
+            let snapshot = try await ref.child("users/\(currentUser.uid)").getData()
+            let lists = snapshot.value as? [List] ?? []
+            return lists
+        } catch {
+            print (error)
+        }
+        return loadLists()
     }
     
     func loadLists() -> [List] {
