@@ -38,8 +38,9 @@ class DataManager {
         guard let currentUser = UserManager.shared.currentUser else { return [] }
         do {
             let snapshot = try await ref.child("users/\(currentUser.uid)").getData()
-            let lists = snapshot.value as? [List] ?? []
-            return lists
+            print("snapshot = \(snapshot)")
+//            let lists = snapshot.value as? [List] ?? []
+//            return lists
         } catch {
             print (error)
         }

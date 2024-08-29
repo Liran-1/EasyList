@@ -16,8 +16,8 @@ class UserManager {
     
     private init() {}
     
-    func createUser(email: String, password: String) -> Bool{
-        self.firebaseAuth.createUser(withEmail: email, password: password) { firebaseResult, error in
+    func createUser(email: String, password: String) async -> Bool{
+        await self.firebaseAuth.createUser(withEmail: email, password: password) { firebaseResult, error in
             if let error = error {
                 print("error occured: \(error.localizedDescription)")
             } else {
@@ -30,7 +30,6 @@ class UserManager {
                 } // end if
             } // end else
         } // end createUser
-        
         return (currentUser != nil)
     }
     
@@ -55,6 +54,7 @@ class UserManager {
     func logUserOut() -> Bool{
         do {
             try self.firebaseAuth.signOut()
+            self.currentUser = firebaseAuth.currentUser
             return true
         } catch let signOutError as NSError {
             print("Error signing out: %@", signOutError)

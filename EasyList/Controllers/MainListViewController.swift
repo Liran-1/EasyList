@@ -32,7 +32,9 @@ class MainListViewController: UIViewController {
         super.viewDidDisappear(true)
         
         if self.isMovingFromParent {
-            logout()
+            UserManager.shared.logUserOut()
+
+//            logout()
         }
     }
     

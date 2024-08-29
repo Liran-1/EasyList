@@ -48,13 +48,15 @@ class RegisterViewController: UIViewController {
     }
     
     @IBAction func register_BTN_createAccount(_ sender: UIButton) {
-        guard let email = register_ETXT_email.text, !email.isEmpty else {return}
-        guard let password = register_ETXT_password.text, !password.isEmpty else {return}
-        if !validatePassword(password: password) { return }
-        
-        if( UserManager.shared.createUser(email: email, password: password)) {
-            self.navigateToMainListScreen()
+        Task { @MainActor in
+            guard let email = register_ETXT_email.text, !email.isEmpty else {return}
+            guard let password = register_ETXT_password.text, !password.isEmpty else {return}
+            if !validatePassword(password: password) { return }
+            
+            if await ( UserManager.shared.createUser(email: email, password: password)) {
+                self.navigateToMainListScreen()
+            }
+            
         }
-
     }
 }
