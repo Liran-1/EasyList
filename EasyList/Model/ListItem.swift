@@ -8,6 +8,7 @@
 import Foundation
 
 class ListItem:Codable {
+    var listItemId: String
     var name: String
     var amount: Double
     var units: Units
@@ -15,6 +16,7 @@ class ListItem:Codable {
     var completed: Bool
     
     init(name: String, amount: Double, units: Units, price: Double, completed: Bool) {
+        self.listItemId = UUID().uuidString
         self.name = name
         self.amount = amount
         self.units = units
@@ -23,6 +25,7 @@ class ListItem:Codable {
     }
     
     enum CodingKeys: String, CodingKey {
+        case listItemId
         case name
         case amount
         case units
@@ -32,6 +35,7 @@ class ListItem:Codable {
     
     required init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.listItemId = try container.decode(String.self, forKey: .listItemId)
         self.name = try container.decode(String.self, forKey: .name)
         self.amount = try container.decode(Double.self, forKey: .amount)
         self.units = try container.decode(Units.self, forKey: .units)
@@ -41,6 +45,7 @@ class ListItem:Codable {
     
     func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(listItemId, forKey: .listItemId)
         try container.encode(name, forKey: .name)
         try container.encode(amount, forKey: .amount)
         try container.encode(units, forKey: .units)

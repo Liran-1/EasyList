@@ -27,11 +27,41 @@ class DataManager {
         }
     }
     
+    func addList(list: List) {
+        guard let currentUser = UserManager.shared.currentUser else { return }
+        
+    }
+    
+    func addTask() {
+        guard let currentUser = UserManager.shared.currentUser else { return }
+
+    }
+    
     func saveListsToDB(_ lists: [List]) {
         ref = Database.database().reference()
         guard let currentUser = UserManager.shared.currentUser else { return }
-        self.ref.child("users").child(currentUser.uid).setValue(["userLists" : lists])
-    }
+        self.ref.child("users").child(currentUser.uid)
+//        self.ref.child("users").child(currentUser.uid).setValue(["userLists" : lists])
+//        let listsRef = ref.child("users").child(currentUser.uid).child("lists")
+//        
+//        var errors: [Error] = []
+//        
+//        for list in lists {
+//            
+//            do {
+//                let listData = try JSONEncoder().encode(list)
+//                let listJSON = try JSONSerialization.jsonObject(with: listData, options: [])
+//                listsRef.child(list.listId).setValue(listJSON) { error, _ in
+//                    if let error = error {
+//                        errors.append(error)
+//                    }
+//                }
+//            } catch {
+//                errors.append(error)
+//            }
+//        }
+        
+    } // saveListsToDB
     
     func loadListsFromDB() async  -> [List]{
         ref = Database.database().reference()
@@ -62,6 +92,14 @@ class DataManager {
             print("Failed to decode lists: \(error)")
             return []
         }
+    }
+    
+    func deleteList() {
+        
+    }
+    
+    func deleteItem() {
+        
     }
     
     

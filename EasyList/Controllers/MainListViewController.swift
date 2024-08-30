@@ -33,19 +33,9 @@ class MainListViewController: UIViewController {
         
         if self.isMovingFromParent {
             UserManager.shared.logUserOut()
-
-//            logout()
         }
     }
     
-    func logout() {
-        do {
-            try Auth.auth().signOut()
-            navigateToLoginScreen()
-        } catch let error {
-            print("Failed to sign out: \(error.localizedDescription)")
-        }
-    }
     
     func navigateToLoginScreen() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
