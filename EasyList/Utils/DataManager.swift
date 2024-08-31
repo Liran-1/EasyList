@@ -27,14 +27,46 @@ class DataManager {
         }
     }
     
-    func addList(list: List) {
+    func addList(list: List, completion: @escaping (Result<Void, Error>) -> Void) {
+        ref = Database.database().reference()
         guard let currentUser = UserManager.shared.currentUser else { return }
+        let listRef = self.ref.child("users").child(currentUser.uid).child("lists").child(list.listId)
+        
+        do {
+            let listData = try JSONEncoder().encode(list)
+            let listJSON = try JSONSerialization.jsonObject(with: listData, options: [])
+            listRef.setValue(listJSON) { error, _ in
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    completion(.success(()))
+                }
+            }
+        } catch let error {
+            completion(.failure(error))
+        }
         
     }
     
-    func addTask() {
+    func addListItem(listItem: ListItem, list: List, completion: @escaping (Result<Void, Error>) -> Void) {
         guard let currentUser = UserManager.shared.currentUser else { return }
-
+        ref = Database.database().reference()
+        let listItemRef = self.ref.child("users").child(currentUser.uid).child("lists").child(list.listId).child(listItem.listItemId)
+        
+        do {
+            let listItemData = try JSONEncoder().encode(listItem)
+            let listItemJSON = try JSONSerialization.jsonObject(with: listItemData, options: [])
+            listItemRef.setValue(listItemJSON) { error, _ in
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    completion(.success(()))
+                }
+            }
+        } catch let error {
+            completion(.failure(error))
+        }
+            
     }
     
     func saveListsToDB(_ lists: [List]) {

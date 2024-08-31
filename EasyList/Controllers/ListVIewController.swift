@@ -17,6 +17,7 @@ class ListViewController: UIViewController{
     let cellReuseIdentifier = "ListItemTableViewCell"
     let addItemVCIdentifier = "ListAddItem"
     
+    var list: List? // The selected list
     var listItems: List?
     
     override func viewDidLoad() {

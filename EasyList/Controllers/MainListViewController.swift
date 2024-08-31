@@ -100,6 +100,13 @@ class MainListViewController: UIViewController {
                 self?.lists.append(newList)
                 self?.main_LST_lists.reloadData()
                 DataManager.shared.saveLists(self?.lists ?? [])
+                DataManager.shared.addList(list: newList) { result in
+                    switch result {
+                    case .success():
+                        print("List successfully saved!")
+                    case .failure(let error):
+                        print("Error saving list: \(error.localizedDescription)")
+                    }}
 //                DataManager.shared.saveListsToDB(self?.lists ?? [])
             }
         }
