@@ -16,39 +16,40 @@ class UserManager {
     
     private init() {}
     
-    func createUser(email: String, password: String) async -> Bool{
-        await self.firebaseAuth.createUser(withEmail: email, password: password) { firebaseResult, error in
+    func createUser(email: String, password: String, completion: @escaping (Result<Void, Error>) -> Void){
+        self.firebaseAuth.createUser(withEmail: email, password: password) { firebaseResult, error in
             if let error = error {
                 print("error occured: \(error.localizedDescription)")
+                completion(.failure(error))
             } else {
                 if self.firebaseAuth.currentUser != nil {
                     self.currentUser = self.firebaseAuth.currentUser
                     if let user = self.currentUser {
                         print("uid = \(user.uid)")
                         print("email = \(user.email)")
+                        completion(.success(()))
                     } //end if
                 } // end if
             } // end else
         } // end createUser
-        return (currentUser != nil)
-    }
+    } // end createUser
     
-    func loginUser(email: String, password: String) -> Bool {
+    func loginUser(email: String, password: String, completion: @escaping (Result<Void, Error>) -> Void) {
         self.firebaseAuth.signIn(withEmail: email, password: password) { firebaseResult, error in
             if let error = error {
                 print("error occured: \(error.localizedDescription)")
+                completion(.failure(error))
             } else {
                 if self.firebaseAuth.currentUser != nil {
                     self.currentUser = self.firebaseAuth.currentUser
                     if let user = self.currentUser {
                         print("uid = \(user.uid)")
                         print("email = \(user.email)")
+                        completion(.success(()))
                     } //end if
                 } // end if
             } // end else
         } // end signIn
-        
-        return (currentUser != nil)
     } // end loginUser
     
     func logUserOut() -> Bool{

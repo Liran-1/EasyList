@@ -23,7 +23,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if Auth.auth().currentUser != nil {
+        if UserManager.shared.currentUser != nil {
             navigateToMainListScreen()
         }
         initUI()
@@ -54,9 +54,14 @@ class LoginViewController: UIViewController {
         guard let email = login_ETXT_email.text, !email.isEmpty else {return}
         guard let password = login_ETXT_password.text, !password.isEmpty else {return}
     
-        if (UserManager.shared.loginUser(email: email, password: password)) {
-            self.navigateToMainListScreen()
-        }
-        
-    }
+        UserManager.shared.loginUser(email: email, password: password) { result in
+            switch result {
+            case .success():
+                print("Successfully logged in!")
+                self.navigateToMainListScreen()
+            case .failure(let error):
+                print("Error logging in: \(error.localizedDescription)")
+            }
+        } // end loginUser
+    } // end IBAction
 }

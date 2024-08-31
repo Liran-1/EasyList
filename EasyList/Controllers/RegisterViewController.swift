@@ -9,7 +9,7 @@ import UIKit
 import FirebaseAuth
 
 class RegisterViewController: UIViewController {
- 
+    
     @IBOutlet weak var register_LBL_signUp: UILabel!
     @IBOutlet weak var register_LBL_signUpSub: UILabel!
     @IBOutlet weak var register_ETXT_email: UITextField!
@@ -48,15 +48,18 @@ class RegisterViewController: UIViewController {
     }
     
     @IBAction func register_BTN_createAccount(_ sender: UIButton) {
-        Task { @MainActor in
-            guard let email = register_ETXT_email.text, !email.isEmpty else {return}
-            guard let password = register_ETXT_password.text, !password.isEmpty else {return}
-            if !validatePassword(password: password) { return }
-            
-            if await ( UserManager.shared.createUser(email: email, password: password)) {
+        guard let email = register_ETXT_email.text, !email.isEmpty else {return}
+        guard let password = register_ETXT_password.text, !password.isEmpty else {return}
+        if !validatePassword(password: password) { return }
+        
+        UserManager.shared.createUser(email: email, password: password) { result in
+            switch result {
+            case .success():
+                print("Successfully created account!")
                 self.navigateToMainListScreen()
+            case .failure(let error):
+                print("Error creating account: \(error.localizedDescription)")
             }
-            
-        }
-    }
+        } // end createUser
+    } // end IBAction
 }
