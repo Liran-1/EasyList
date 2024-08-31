@@ -24,8 +24,8 @@ class DataManager {
             UserDefaults.standard.set(data, forKey: listsKey)
         } catch {
             print("Failed to encode lists: \(error)")
-        }
-    }
+        } // end do-catch
+    } // end saveLists
     
     func addList(list: List, completion: @escaping (Result<Void, Error>) -> Void) {
         ref = Database.database().reference()
@@ -41,12 +41,11 @@ class DataManager {
                 } else {
                     completion(.success(()))
                 }
-            }
+            } // end setValue
         } catch let error {
             completion(.failure(error))
-        }
-        
-    }
+        } // end do-catch
+    } // end addList
     
     func addListItem(listItem: ListItem, list: List, completion: @escaping (Result<Void, Error>) -> Void) {
         guard let currentUser = UserManager.shared.currentUser else { return }
@@ -62,13 +61,11 @@ class DataManager {
                 } else {
                     completion(.success(()))
                 }
-            }
+            } // end setValue
         } catch let error {
             completion(.failure(error))
-        }
-        
-    }
-    
+        } // end do-catch
+    } // addListItem
     
     func loadListsFromDB(completion: @escaping (Result<[List], Error>) -> Void){
         ref = Database.database().reference()
@@ -137,15 +134,33 @@ class DataManager {
         }
     }
     
-    func deleteList() {
+    func deleteList(list: List, completion: @escaping (Result<Void, Error>) -> Void) {
+        guard let currentUser = UserManager.shared.currentUser else { return }
+        ref = Database.database().reference()
+        let listRef = self.ref.child("users").child(currentUser.uid).child("lists").child(list.listId)
         
-    }
+        listRef.removeValue() { error, _ in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        } // end removeValue
+    } // end deleteList
     
-    func deleteItem() {
+    func deleteListItem(listItem: ListItem, list: List, completion: @escaping (Result<Void, Error>) -> Void) {
+        guard let currentUser = UserManager.shared.currentUser else { return }
+        ref = Database.database().reference()
+        let listItemRef = self.ref.child("users").child(currentUser.uid).child("lists").child(list.listId).child("items").child(listItem.listItemId)
         
-    }
-    
-    
+        listItemRef.removeValue() { error, _ in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        } // end removeListItem
+    } // end deleteListItem
     
     
 }

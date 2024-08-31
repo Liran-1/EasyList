@@ -105,6 +105,7 @@ class ListViewController: UIViewController{
                 switch result {
                 case .success:
                     print("ItemList successfully saved!")
+                    self.list_LST_items.reloadData()
                 case .failure(let error):
                     print("Error saving item to list: \(error.localizedDescription)")
                 }
@@ -188,10 +189,21 @@ extension ListViewController:  UITableViewDelegate, UITableViewDataSource {
     }
     
     private func handleDelete(at indexPath: IndexPath) {
+        DataManager.shared.deleteListItem(listItem: listItems!.items[indexPath.row], list: listItems!) { result in
+            switch result {
+            case .success():
+                print("item removed successfully")
+                self.list_LST_items.reloadData()
+            case .failure(let error):
+                print("Error removing listItem: \(error.localizedDescription)")
+                return
+            }
+        }
+        
         // Remove the item from the list
         listItems?.items.remove(at: indexPath.row)
-        
         // Animate the deletion
         list_LST_items.deleteRows(at: [indexPath], with: .automatic)
+        self.list_LST_items.reloadData()
     }
 }

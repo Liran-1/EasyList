@@ -154,6 +154,18 @@ extension MainListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     private func handleDelete(at indexPath: IndexPath) {
+        
+        DataManager.shared.deleteList(list: lists[indexPath.row]) { result in
+            switch result {
+            case .success():
+                print("List removed successfully")
+                self.main_LST_lists.reloadData()
+            case .failure(let error):
+                print("Error removing list: \(error.localizedDescription)")
+                return
+            }
+        }
+
         // Remove the item from the list
         lists.remove(at: indexPath.row)
         
