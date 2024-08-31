@@ -101,7 +101,7 @@ class ListViewController: UIViewController{
             
             let newItem = ListItem(name: itemName, amount: itemAmount, units: itemUnits, price: itemPrice, completed: false)
             list.items.append(newItem)
-            DataManager.shared.addListItem(listItem: newItem, list: list) { result in
+            DataManager.shared.addListItemToDB(listItem: newItem, list: list) { result in
                 switch result {
                 case .success:
                     print("ItemList successfully saved!")
@@ -175,6 +175,15 @@ extension ListViewController:  UITableViewDelegate, UITableViewDataSource {
         
         let item = listItems?.items[indexPath.row]
         item?.completed.toggle()
+        
+        DataManager.shared.updateListItem(listItem: listItems!.items[indexPath.row], list: listItems!) { result in
+            switch result {
+            case .success():
+                print("Item updated")
+                self.list_LST_items.reloadRows(at: [indexPath], with: .automatic)
+            case .failure(let error):
+                print("Error updating item: \(error.localizedDescription)")
+            }}
         
         list_LST_items.reloadRows(at: [indexPath], with: .automatic)
     }

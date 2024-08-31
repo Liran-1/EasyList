@@ -27,7 +27,7 @@ class DataManager {
         } // end do-catch
     } // end saveLists
     
-    func addList(list: List, completion: @escaping (Result<Void, Error>) -> Void) {
+    func addListToDB(list: List, completion: @escaping (Result<Void, Error>) -> Void) {
         ref = Database.database().reference()
         guard let currentUser = UserManager.shared.currentUser else { return }
         let listRef = self.ref.child("users").child(currentUser.uid).child("lists").child(list.listId)
@@ -47,7 +47,7 @@ class DataManager {
         } // end do-catch
     } // end addList
     
-    func addListItem(listItem: ListItem, list: List, completion: @escaping (Result<Void, Error>) -> Void) {
+    func addListItemToDB(listItem: ListItem, list: List, completion: @escaping (Result<Void, Error>) -> Void) {
         guard let currentUser = UserManager.shared.currentUser else { return }
         ref = Database.database().reference()
         let listItemRef = self.ref.child("users").child(currentUser.uid).child("lists").child(list.listId).child("items").child(listItem.listItemId)
@@ -66,6 +66,22 @@ class DataManager {
             completion(.failure(error))
         } // end do-catch
     } // addListItem
+
+    func updateListItem(listItem: ListItem, list: List, completion: @escaping (Result<Void, Error>) -> Void) {
+        guard let currentUser = UserManager.shared.currentUser else { return }
+        ref = Database.database().reference()
+        let listItemRef = self.ref.child("users").child(currentUser.uid).child("lists").child(list.listId).child("items").child(listItem.listItemId)
+        
+        let listItemCompletedKey = ListItem.CodingKeys.completed.rawValue
+        let childUpdate = ["\(listItemCompletedKey)" : listItem.completed]
+        listItemRef.updateChildValues(childUpdate) { error, _ in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        } // end setValue
+    }
     
     func loadListsFromDB(completion: @escaping (Result<[List], Error>) -> Void){
         ref = Database.database().reference()
@@ -162,5 +178,5 @@ class DataManager {
         } // end removeListItem
     } // end deleteListItem
     
-    
+
 }
