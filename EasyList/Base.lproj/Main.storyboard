@@ -308,6 +308,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="main_BTN_addNewList" destination="xPC-OH-4qG" id="ni5-xU-45R"/>
+                        <outlet property="main_LBL_title" destination="Go3-Pm-OP3" id="dJv-wJ-xAG"/>
                         <outlet property="main_LST_lists" destination="AUu-Sb-N2j" id="gNu-d0-dI1"/>
                     </connections>
                 </viewController>

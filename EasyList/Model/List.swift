@@ -24,6 +24,12 @@ class List:Codable {
         self.items = items
     }
     
+    init(listId: String, title: String, items: [ListItem]) {
+        self.listId = listId
+        self.title = title
+        self.items = items
+    }
+    
     enum CodingKeys: String, CodingKey {
         case listId
         case title

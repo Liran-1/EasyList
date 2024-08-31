@@ -15,6 +15,7 @@ class MainListViewController: UIViewController {
 
     var lists: [List] = []
     
+    @IBOutlet weak var main_LBL_title: UILabel!
     @IBOutlet weak var main_LST_lists: UITableView!
     @IBOutlet weak var main_BTN_addNewList: UIButton!
     //    let listData = testMainLists
@@ -51,28 +52,24 @@ class MainListViewController: UIViewController {
     }
     
     func loadListData() {
-        lists = DataManager.shared.loadLists()
-//        Task { @MainActor in
-//            do {
-//                self.lists = try await DataManager.shared.loadListsFromDB()
-//            } catch {
-//                print("Loading lists from Firebase failed with error \(error)")
-//            }
-//        } // end Task
-        
-        
-        // Load the data
-//        if !UserDefaults().bool(forKey: ConstantsUserDefaults.setup) {
-//            UserDefaults().set(true, forKey: ConstantsUserDefaults.setup)
-//            UserDefaults().set(0, forKey: ConstantsUserDefaults.numberOfLists)
-//        }
-        
-        main_LST_lists.reloadData()
+//        lists = DataManager.shared.loadLists()
+        DataManager.shared.loadListsFromDB() { result in
+            switch result {
+            case .success(let lists):
+                self.lists = lists
+                print("Loaded lists: \(lists)")
+                self.main_LST_lists.reloadData()
+            case .failure(let error):
+                print("Error loading lists: \(error.localizedDescription)")
+            }
+            
+        }
     } // end loadListData
     
     func initUI() {
         let uiManager = UIManager.shared
         
+        uiManager.setTitleLabel(titleLabel: main_LBL_title)
         uiManager.setTableView(tableView: main_LST_lists)
         uiManager.setButton(button: main_BTN_addNewList)
     } // end initUI

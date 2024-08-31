@@ -17,8 +17,7 @@ class ListViewController: UIViewController{
     let cellReuseIdentifier = "ListItemTableViewCell"
     let addItemVCIdentifier = "ListAddItem"
     
-    var list: List? // The selected list
-    var listItems: List?
+    var listItems: List? // The selected list
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,6 +101,14 @@ class ListViewController: UIViewController{
             
             let newItem = ListItem(name: itemName, amount: itemAmount, units: itemUnits, price: itemPrice, completed: false)
             list.items.append(newItem)
+            DataManager.shared.addListItem(listItem: newItem, list: list) { result in
+                switch result {
+                case .success:
+                    print("ItemList successfully saved!")
+                case .failure(let error):
+                    print("Error saving item to list: \(error.localizedDescription)")
+                }
+            }
             self.list_LST_items.reloadData()
             updateSavedData(updatedList: list)
         }

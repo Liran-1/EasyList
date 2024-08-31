@@ -23,6 +23,15 @@ class ListItem:Codable {
         self.price = price
         self.completed = completed
     }
+
+    init(listItemId: String, name: String, amount: Double, units: Units, price: Double, completed: Bool) {
+        self.listItemId = listItemId
+        self.name = name
+        self.amount = amount
+        self.units = units
+        self.price = price
+        self.completed = completed
+    }
     
     enum CodingKeys: String, CodingKey {
         case listItemId
