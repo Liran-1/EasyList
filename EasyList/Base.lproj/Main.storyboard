@@ -411,6 +411,12 @@
                                     <action selector="addItem:" destination="VT0-eR-iFC" eventType="touchUpInside" id="FBx-M5-qNT"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Es4-Hk-7s4">
+                                <rect key="frame" x="311" y="123" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hbF-L6-5fG"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -421,7 +427,9 @@
                             <constraint firstItem="hbF-L6-5fG" firstAttribute="bottom" secondItem="fBE-2n-lDr" secondAttribute="bottom" constant="64" id="8C9-ST-xeK"/>
                             <constraint firstItem="HFi-w4-44s" firstAttribute="leading" secondItem="Rj3-Ry-jtu" secondAttribute="leading" id="CvO-Oj-1GF"/>
                             <constraint firstItem="9rP-PE-Vdy" firstAttribute="centerX" secondItem="Rj3-Ry-jtu" secondAttribute="centerX" id="FzZ-gI-8Dk"/>
+                            <constraint firstItem="hbF-L6-5fG" firstAttribute="trailing" secondItem="Es4-Hk-7s4" secondAttribute="trailing" constant="40" id="HWO-NM-A1l"/>
                             <constraint firstItem="9rP-PE-Vdy" firstAttribute="top" secondItem="hbF-L6-5fG" secondAttribute="top" constant="20" id="KOY-7y-dsr"/>
+                            <constraint firstItem="Es4-Hk-7s4" firstAttribute="top" secondItem="hbF-L6-5fG" secondAttribute="top" constant="20" id="THj-e6-q0h"/>
                             <constraint firstItem="fBE-2n-lDr" firstAttribute="top" secondItem="9rP-PE-Vdy" secondAttribute="bottom" constant="40" id="ZsF-Wc-lBd"/>
                             <constraint firstItem="ABa-gf-e8h" firstAttribute="centerX" secondItem="Rj3-Ry-jtu" secondAttribute="centerX" id="ky7-Dk-7pG"/>
                             <constraint firstItem="hbF-L6-5fG" firstAttribute="trailing" secondItem="fBE-2n-lDr" secondAttribute="trailing" constant="10" id="skb-sz-Vpk"/>
@@ -453,6 +461,7 @@
                     <connections>
                         <outlet property="list_BTN_addNewItem" destination="ABa-gf-e8h" id="z9L-IK-src"/>
                         <outlet property="list_LBL_listName" destination="9rP-PE-Vdy" id="w0M-4Y-x6t"/>
+                        <outlet property="list_LBL_totalSumChecked" destination="Es4-Hk-7s4" id="MHc-sa-dWl"/>
                         <outlet property="list_LST_items" destination="fBE-2n-lDr" id="5uu-9C-efv"/>
                     </connections>
                 </viewController>

@@ -11,6 +11,7 @@ import Foundation
 class ListViewController: UIViewController{
     
     @IBOutlet weak var list_LBL_listName: UILabel!
+    @IBOutlet weak var list_LBL_totalSumChecked: UILabel!
     @IBOutlet weak var list_LST_items: UITableView!
     @IBOutlet weak var list_BTN_addNewItem: UIButton!
     
@@ -33,6 +34,8 @@ class ListViewController: UIViewController{
         list_LST_items.dataSource = self
         
         self.title = listItems?.title
+        self.list_LBL_listName.text = listItems?.title
+        self.calcTotalSum()
         list_LST_items.reloadData()
     }
     
@@ -40,6 +43,7 @@ class ListViewController: UIViewController{
         let uiManager = UIManager.shared
         
         uiManager.setTitleLabel(titleLabel: list_LBL_listName)
+        uiManager.setTitleLabel(titleLabel: list_LBL_totalSumChecked)
         uiManager.setTableView(tableView: list_LST_items)
         uiManager.setButton(button: list_BTN_addNewItem)
     }
@@ -87,19 +91,8 @@ class ListViewController: UIViewController{
                   let itemPriceStr = alertController.textFields?[3].text, !itemPriceStr.isEmpty,
                   let itemPrice = Double(itemPriceStr)
             else { return }
-//            let itemName = alertController.textFields?[0].text
-            
-//            let itemAmountStr = alertController.textFields?[1].text
-//            let itemAmount = Double(itemAmountStr)
-            
-            
-//            let itemUnitsStr = alertController.textFields?[2].text
-//            guard let itemUnits = Units(rawValue: itemUnitsStr) else {return}
-            
-//            let itemPriceStr = alertController.textFields?[3].text
-//            let itemPrice = Double(itemPriceStr)
-            
-            let newItem = ListItem(name: itemName, amount: itemAmount, units: itemUnits, price: itemPrice, completed: false)
+
+            let newItem = ListItem(name: itemName, amount: itemAmount, units: itemUnits, price: itemPrice)
             list.items.append(newItem)
             DataManager.shared.addListItemToDB(listItem: newItem, list: list) { result in
                 switch result {
@@ -134,6 +127,18 @@ class ListViewController: UIViewController{
             DataManager.shared.saveLists(allLists)
         }
     }
+    
+    func calcTotalSum() {
+        guard let items = self.listItems?.items else { return }
+        var totalSum: Double = 0
+        for item in items {
+            if item.completed {
+                totalSum += item.price
+            }
+        }
+        self.list_LBL_totalSumChecked.text = String(totalSum)
+    }
+    
 }
 
 extension ListViewController: UIPickerViewDataSource, UIPickerViewDelegate {
@@ -184,7 +189,7 @@ extension ListViewController:  UITableViewDelegate, UITableViewDataSource {
             case .failure(let error):
                 print("Error updating item: \(error.localizedDescription)")
             }}
-        
+        self.updateSum(at: indexPath)
         list_LST_items.reloadRows(at: [indexPath], with: .automatic)
     }
     
@@ -214,5 +219,18 @@ extension ListViewController:  UITableViewDelegate, UITableViewDataSource {
         // Animate the deletion
         list_LST_items.deleteRows(at: [indexPath], with: .automatic)
         self.list_LST_items.reloadData()
+    }
+    
+    func updateSum(at indexPath: IndexPath) {
+        guard let listItems = self.listItems,
+        let totalSumStr = self.list_LBL_totalSumChecked.text,
+        var totalSum = Double(totalSumStr) else { return }
+        let item = listItems.items[indexPath.row]
+        if item.completed {
+            totalSum += item.price
+        } else {
+            totalSum -= item.price
+        }
+        self.list_LBL_totalSumChecked.text = String(totalSum)
     }
 }

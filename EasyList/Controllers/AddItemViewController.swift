@@ -48,6 +48,8 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
               let itemPrice = Double(itemPriceStr)
         else {return}
         
+        let newItem = ListItem(name: itemName, amount: itemAmount, units: itemUnits, price: itemPrice)
+        
 //        let itemAmount = Double(itemAmountStr) ?? 0.0
 //        guard let itemUnits = Units(rawValue: itemUnitsStr) else {return}
 //        let itemPrice = Double(itemPriceStr) ?? 0.0
